@@ -1,0 +1,94 @@
+<div>
+  <h2 id="page-heading" data-cy="SeguinteMensagemHeading">
+    <span>Seguinte Mensagems</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span>Atualizar lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-seguinte-mensagem"
+        [routerLink]="['/seguinte-mensagem/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span>Criar novo Seguinte Mensagem</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (seguinteMensagems?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span>Nenhum Seguinte Mensagem encontrado</span>
+    </div>
+  }
+
+  @if (seguinteMensagems && seguinteMensagems.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span>Código</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="descricao">
+              <div class="d-flex">
+                <span>Descricao</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (seguinteMensagem of seguinteMensagems; track trackId(seguinteMensagem)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/seguinte-mensagem', seguinteMensagem.id, 'view']">{{ seguinteMensagem.id }}</a>
+              </td>
+              <td>{{ seguinteMensagem.descricao }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/seguinte-mensagem', seguinteMensagem.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline">Visualizar</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/seguinte-mensagem', seguinteMensagem.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline">Editar</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(seguinteMensagem)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline">Excluir</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

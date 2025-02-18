@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (interacao(); as interacaoRef) {
+      <div>
+        <h2 data-cy="interacaoDetailsHeading"><span>Interacao</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>Código</span></dt>
+          <dd>
+            <span>{{ interacaoRef.id }}</span>
+          </dd>
+          <dt><span>Data Hora</span></dt>
+          <dd>
+            <span>{{ interacaoRef.dataHora | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span>Usuario</span></dt>
+          <dd>
+            @if (interacao()!.usuario) {
+              <div>
+                <a [routerLink]="['/usuario', interacao()!.usuario?.id, 'view']">{{ interacaoRef.usuario?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span>Mensagem</span></dt>
+          <dd>
+            @if (interacao()!.mensagem) {
+              <div>
+                <a [routerLink]="['/mensagem', interacao()!.mensagem?.id, 'view']">{{ interacaoRef.mensagem?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Voltar</span>
+        </button>
+
+        <button type="button" [routerLink]="['/interacao', interacaoRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

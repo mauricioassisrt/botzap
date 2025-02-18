@@ -1,0 +1,25 @@
+{
+  "annotations": {
+    "changelogDate": "20250218020307"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "descricao",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "SeguinteMensagem",
+  "relationships": [
+    {
+      "otherEntityName": "mensagem",
+      "otherEntityRelationshipName": "fluxo",
+      "relationshipName": "destino",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

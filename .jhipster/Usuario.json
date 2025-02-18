@@ -1,0 +1,22 @@
+{
+  "annotations": {
+    "changelogDate": "20250218020304"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "nome",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "telefone",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    }
+  ],
+  "name": "Usuario",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

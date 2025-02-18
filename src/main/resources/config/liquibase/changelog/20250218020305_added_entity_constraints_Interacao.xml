@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity Interacao.
+    -->
+    <changeSet id="20250218020305-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="usuario_id"
+                                 baseTableName="interacao"
+                                 constraintName="fk_interacao__usuario_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="usuario"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="mensagem_id"
+                                 baseTableName="interacao"
+                                 constraintName="fk_interacao__mensagem_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="mensagem"
+                                 />
+    </changeSet>
+</databaseChangeLog>
