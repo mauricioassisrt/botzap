@@ -1,0 +1,35 @@
+entity Usuario {
+    nome String required,
+    telefone String required unique
+}
+
+entity Mensagem {
+    texto String required,
+    opcao Integer,
+    fluxo SeguinteMensagem
+}
+
+entity SeguinteMensagem {
+    descricao String required
+}
+
+entity Interacao {
+    usuario Usuario required,
+    mensagem Mensagem required,
+    dataHora Instant required
+}
+
+relationship OneToMany {
+    Mensagem{fluxo} to SeguinteMensagem{mensagem}
+}
+
+relationship OneToMany {
+    Usuario{interacoes} to Interacao{usuario}
+}
+
+relationship OneToMany {
+    Mensagem{historico} to Interacao{mensagem}
+}
+
+service all with serviceClass
+paginate Mensagem, Interacao with pagination
