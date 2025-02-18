@@ -844,9 +844,9 @@
             </activation>
             <properties>
                 <!-- default Spring profiles -->
-                <liquibase-plugin.password>password</liquibase-plugin.password>
+                <liquibase-plugin.password>root</liquibase-plugin.password>
                 <liquibase-plugin.url>jdbc:postgresql://localhost:5432/botzap</liquibase-plugin.url>
-                <liquibase-plugin.username>botzap</liquibase-plugin.username>
+                <liquibase-plugin.username>postgres</liquibase-plugin.username>
                 <profile.test>testdev</profile.test>
                 <spring.profiles.active>dev${profile.tls}${profile.no-liquibase}</spring.profiles.active>
             </properties>
