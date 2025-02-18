@@ -17,15 +17,15 @@ entity Interacao {
 }
 
 relationship ManyToOne {
-  Interacao{usuario} to Usuario
+  Interacao{usuario(nome)} to Usuario
 }
 
 relationship ManyToOne {
-  Interacao{mensagem} to Mensagem
+  Interacao{mensagem(texto)} to Mensagem
 }
 
 relationship ManyToOne {
-  Mensagem{fluxo} to SeguinteMensagem{destino}
+  Mensagem{fluxo(descricao)} to SeguinteMensagem{destino}
 }
 
 service all with serviceClass

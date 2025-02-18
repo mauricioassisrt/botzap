@@ -5,11 +5,13 @@ import static com.botzap.web.rest.TestUtil.createUpdateProxyForBean;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.Mockito.*;
 
 import com.botzap.IntegrationTest;
 import com.botzap.domain.Interacao;
 import com.botzap.repository.EntityManager;
 import com.botzap.repository.InteracaoRepository;
+import com.botzap.service.InteracaoService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -18,16 +20,21 @@ import java.util.concurrent.atomic.AtomicLong;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.reactive.server.WebTestClient;
+import reactor.core.publisher.Flux;
 
 /**
  * Integration tests for the {@link InteracaoResource} REST controller.
  */
 @IntegrationTest
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureWebTestClient(timeout = IntegrationTest.DEFAULT_ENTITY_TIMEOUT)
 @WithMockUser
 class InteracaoResourceIT {
@@ -46,6 +53,12 @@ class InteracaoResourceIT {
 
     @Autowired
     private InteracaoRepository interacaoRepository;
+
+    @Mock
+    private InteracaoRepository interacaoRepositoryMock;
+
+    @Mock
+    private InteracaoService interacaoServiceMock;
 
     @Autowired
     private EntityManager em;
@@ -183,6 +196,23 @@ class InteracaoResourceIT {
             .value(hasItem(interacao.getId().intValue()))
             .jsonPath("$.[*].dataHora")
             .value(hasItem(DEFAULT_DATA_HORA.toString()));
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllInteracaosWithEagerRelationshipsIsEnabled() {
+        when(interacaoServiceMock.findAllWithEagerRelationships(any())).thenReturn(Flux.empty());
+
+        webTestClient.get().uri(ENTITY_API_URL + "?eagerload=true").exchange().expectStatus().isOk();
+
+        verify(interacaoServiceMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllInteracaosWithEagerRelationshipsIsNotEnabled() {
+        when(interacaoServiceMock.findAllWithEagerRelationships(any())).thenReturn(Flux.empty());
+
+        webTestClient.get().uri(ENTITY_API_URL + "?eagerload=false").exchange().expectStatus().isOk();
+        verify(interacaoRepositoryMock, times(1)).findAllWithEagerRelationships(any());
     }
 
     @Test

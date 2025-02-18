@@ -14,12 +14,14 @@
   "pagination": "pagination",
   "relationships": [
     {
+      "otherEntityField": "nome",
       "otherEntityName": "usuario",
       "relationshipName": "usuario",
       "relationshipSide": "left",
       "relationshipType": "many-to-one"
     },
     {
+      "otherEntityField": "texto",
       "otherEntityName": "mensagem",
       "relationshipName": "mensagem",
       "relationshipSide": "left",

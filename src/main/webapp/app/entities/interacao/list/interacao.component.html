@@ -49,13 +49,13 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" jhiSortBy="usuario.id">
+            <th scope="col" jhiSortBy="usuario.nome">
               <div class="d-flex">
                 <span>Usuario</span>
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" jhiSortBy="mensagem.id">
+            <th scope="col" jhiSortBy="mensagem.texto">
               <div class="d-flex">
                 <span>Mensagem</span>
                 <fa-icon class="p-1" icon="sort"></fa-icon>
@@ -74,14 +74,14 @@
               <td>
                 @if (interacao.usuario) {
                   <div>
-                    <a [routerLink]="['/usuario', interacao.usuario.id, 'view']">{{ interacao.usuario.id }}</a>
+                    <a [routerLink]="['/usuario', interacao.usuario.id, 'view']">{{ interacao.usuario.nome }}</a>
                   </div>
                 }
               </td>
               <td>
                 @if (interacao.mensagem) {
                   <div>
-                    <a [routerLink]="['/mensagem', interacao.mensagem.id, 'view']">{{ interacao.mensagem.id }}</a>
+                    <a [routerLink]="['/mensagem', interacao.mensagem.id, 'view']">{{ interacao.mensagem.texto }}</a>
                   </div>
                 }
               </td>

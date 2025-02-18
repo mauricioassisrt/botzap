@@ -81,6 +81,15 @@ public class InteracaoService {
     }
 
     /**
+     * Get all the interacaos with eager load of many-to-many relationships.
+     *
+     * @return the list of entities.
+     */
+    public Flux<Interacao> findAllWithEagerRelationships(Pageable pageable) {
+        return interacaoRepository.findAllWithEagerRelationships(pageable);
+    }
+
+    /**
      * Returns the number of interacaos available.
      * @return the number of entities in the database.
      *
@@ -98,7 +107,7 @@ public class InteracaoService {
     @Transactional(readOnly = true)
     public Mono<Interacao> findOne(Long id) {
         LOG.debug("Request to get Interacao : {}", id);
-        return interacaoRepository.findById(id);
+        return interacaoRepository.findOneWithEagerRelationships(id);
     }
 
     /**

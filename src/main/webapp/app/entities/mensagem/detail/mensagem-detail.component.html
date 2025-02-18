@@ -27,7 +27,7 @@
           <dd>
             @if (mensagem()!.fluxo) {
               <div>
-                <a [routerLink]="['/seguinte-mensagem', mensagem()!.fluxo?.id, 'view']">{{ mensagemRef.fluxo?.id }}</a>
+                <a [routerLink]="['/seguinte-mensagem', mensagem()!.fluxo?.id, 'view']">{{ mensagemRef.fluxo?.descricao }}</a>
               </div>
             }
           </dd>

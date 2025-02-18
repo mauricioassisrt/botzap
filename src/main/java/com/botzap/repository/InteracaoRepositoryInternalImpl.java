@@ -100,6 +100,21 @@ class InteracaoRepositoryInternalImpl extends SimpleR2dbcRepository<Interacao, L
         return createQuery(null, whereClause).one();
     }
 
+    @Override
+    public Mono<Interacao> findOneWithEagerRelationships(Long id) {
+        return findById(id);
+    }
+
+    @Override
+    public Flux<Interacao> findAllWithEagerRelationships() {
+        return findAll();
+    }
+
+    @Override
+    public Flux<Interacao> findAllWithEagerRelationships(Pageable page) {
+        return findAllBy(page);
+    }
+
     private Interacao process(Row row, RowMetadata metadata) {
         Interacao entity = interacaoMapper.apply(row, "e");
         entity.setUsuario(usuarioMapper.apply(row, "usuario"));

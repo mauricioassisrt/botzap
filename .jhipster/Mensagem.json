@@ -18,6 +18,7 @@
   "pagination": "pagination",
   "relationships": [
     {
+      "otherEntityField": "descricao",
       "otherEntityName": "seguinteMensagem",
       "otherEntityRelationshipName": "destino",
       "relationshipName": "fluxo",

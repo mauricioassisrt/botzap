@@ -16,6 +16,15 @@ import reactor.core.publisher.Mono;
 public interface InteracaoRepository extends ReactiveCrudRepository<Interacao, Long>, InteracaoRepositoryInternal {
     Flux<Interacao> findAllBy(Pageable pageable);
 
+    @Override
+    Mono<Interacao> findOneWithEagerRelationships(Long id);
+
+    @Override
+    Flux<Interacao> findAllWithEagerRelationships();
+
+    @Override
+    Flux<Interacao> findAllWithEagerRelationships(Pageable page);
+
     @Query("SELECT * FROM interacao entity WHERE entity.usuario_id = :id")
     Flux<Interacao> findByUsuario(Long id);
 
@@ -51,4 +60,12 @@ interface InteracaoRepositoryInternal {
     Mono<Interacao> findById(Long id);
     // this is not supported at the moment because of https://github.com/jhipster/generator-jhipster/issues/18269
     // Flux<Interacao> findAllBy(Pageable pageable, Criteria criteria);
+
+    Mono<Interacao> findOneWithEagerRelationships(Long id);
+
+    Flux<Interacao> findAllWithEagerRelationships();
+
+    Flux<Interacao> findAllWithEagerRelationships(Pageable page);
+
+    Mono<Void> deleteById(Long id);
 }

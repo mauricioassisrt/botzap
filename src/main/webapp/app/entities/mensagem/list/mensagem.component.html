@@ -56,7 +56,7 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
-            <th scope="col" jhiSortBy="fluxo.id">
+            <th scope="col" jhiSortBy="fluxo.descricao">
               <div class="d-flex">
                 <span>Fluxo</span>
                 <fa-icon class="p-1" icon="sort"></fa-icon>
@@ -76,7 +76,7 @@
               <td>
                 @if (mensagem.fluxo) {
                   <div>
-                    <a [routerLink]="['/seguinte-mensagem', mensagem.fluxo.id, 'view']">{{ mensagem.fluxo.id }}</a>
+                    <a [routerLink]="['/seguinte-mensagem', mensagem.fluxo.id, 'view']">{{ mensagem.fluxo.descricao }}</a>
                   </div>
                 }
               </td>

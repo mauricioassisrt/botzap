@@ -84,6 +84,15 @@ public class MensagemService {
     }
 
     /**
+     * Get all the mensagems with eager load of many-to-many relationships.
+     *
+     * @return the list of entities.
+     */
+    public Flux<Mensagem> findAllWithEagerRelationships(Pageable pageable) {
+        return mensagemRepository.findAllWithEagerRelationships(pageable);
+    }
+
+    /**
      * Returns the number of mensagems available.
      * @return the number of entities in the database.
      *
@@ -101,7 +110,7 @@ public class MensagemService {
     @Transactional(readOnly = true)
     public Mono<Mensagem> findOne(Long id) {
         LOG.debug("Request to get Mensagem : {}", id);
-        return mensagemRepository.findById(id);
+        return mensagemRepository.findOneWithEagerRelationships(id);
     }
 
     /**

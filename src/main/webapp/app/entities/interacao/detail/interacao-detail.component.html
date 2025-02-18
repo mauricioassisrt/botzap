@@ -23,7 +23,7 @@
           <dd>
             @if (interacao()!.usuario) {
               <div>
-                <a [routerLink]="['/usuario', interacao()!.usuario?.id, 'view']">{{ interacaoRef.usuario?.id }}</a>
+                <a [routerLink]="['/usuario', interacao()!.usuario?.id, 'view']">{{ interacaoRef.usuario?.nome }}</a>
               </div>
             }
           </dd>
@@ -31,7 +31,7 @@
           <dd>
             @if (interacao()!.mensagem) {
               <div>
-                <a [routerLink]="['/mensagem', interacao()!.mensagem?.id, 'view']">{{ interacaoRef.mensagem?.id }}</a>
+                <a [routerLink]="['/mensagem', interacao()!.mensagem?.id, 'view']">{{ interacaoRef.mensagem?.texto }}</a>
               </div>
             }
           </dd>

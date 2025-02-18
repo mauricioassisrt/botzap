@@ -43,7 +43,7 @@
           >
             <option [ngValue]="null"></option>
             @for (seguinteMensagemOption of seguinteMensagemsSharedCollection; track $index) {
-              <option [ngValue]="seguinteMensagemOption">{{ seguinteMensagemOption.id }}</option>
+              <option [ngValue]="seguinteMensagemOption">{{ seguinteMensagemOption.descricao }}</option>
             }
           </select>
         </div>

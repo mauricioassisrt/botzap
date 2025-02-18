@@ -91,6 +91,21 @@ class MensagemRepositoryInternalImpl extends SimpleR2dbcRepository<Mensagem, Lon
         return createQuery(null, whereClause).one();
     }
 
+    @Override
+    public Mono<Mensagem> findOneWithEagerRelationships(Long id) {
+        return findById(id);
+    }
+
+    @Override
+    public Flux<Mensagem> findAllWithEagerRelationships() {
+        return findAll();
+    }
+
+    @Override
+    public Flux<Mensagem> findAllWithEagerRelationships(Pageable page) {
+        return findAllBy(page);
+    }
+
     private Mensagem process(Row row, RowMetadata metadata) {
         Mensagem entity = mensagemMapper.apply(row, "e");
         entity.setFluxo(seguintemensagemMapper.apply(row, "fluxo"));
